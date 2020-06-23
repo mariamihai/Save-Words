@@ -1,9 +1,7 @@
 package com.languagedrops.savewords;
 
 import com.languagedrops.savewords.config.DefaultLanguageConfig;
-import com.languagedrops.savewords.services.DocumentConstructor;
 import com.languagedrops.savewords.services.ProcessLanguageService;
-import com.languagedrops.savewords.dataCollectors.SvgCollector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,12 +14,6 @@ public class SaveWordsApplication implements CommandLineRunner {
     DefaultLanguageConfig defaultLanguageConfig;
     @Autowired
     ProcessLanguageService processLanguageService;
-
-    @Autowired
-    DocumentConstructor documentConstructor;
-
-    @Autowired
-    SvgCollector svgCollector;
 
     public static void main(String[] args) {
         SpringApplication.run(SaveWordsApplication.class, args);

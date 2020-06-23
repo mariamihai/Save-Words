@@ -1,4 +1,4 @@
-package com.languagedrops.savewords.dataCollectors;
+package com.languagedrops.savewords.datacollectors;
 
 import com.languagedrops.savewords.model.WordInfo;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.languagedrops.savewords.dataCollectors;
+package com.languagedrops.savewords.datacollectors;
 
 import com.languagedrops.savewords.config.DocumentParsingConfig;
 import org.jsoup.Jsoup;
@@ -8,10 +8,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.languagedrops.savewords.config.DocumentParsingConfig.HREF_ATTRIBUTE;
 import static com.languagedrops.savewords.config.DocumentParsingConfig.TITLE_ATTRIBUTE;
@@ -20,6 +17,8 @@ import static com.languagedrops.savewords.config.DocumentParsingConfig.TITLE_ATT
 public class LanguageDataCollector {
 
     private DocumentParsingConfig documentParsingConfig;
+
+    private Set<String> allTopicNames = new HashSet<>();
 
     public LanguageDataCollector(DocumentParsingConfig documentParsingConfig) {
         this.documentParsingConfig = documentParsingConfig;
@@ -46,8 +45,11 @@ public class LanguageDataCollector {
             List<Element> allTopics = getAllTopicElements(categoryElement);
 
             for(Element topicElement : allTopics) {
-                topicsWithLinks.put(topicElement.attr(TITLE_ATTRIBUTE),
-                                    topicElement.attr(HREF_ATTRIBUTE));
+                String title = topicElement.attr(TITLE_ATTRIBUTE);
+                String href = topicElement.attr(HREF_ATTRIBUTE);
+
+                topicsWithLinks.put(title,href);
+                allTopicNames.add(title);
             }
         });
 
@@ -76,5 +78,9 @@ public class LanguageDataCollector {
         allTopics.addAll(secondColumn.getElementsByClass(documentParsingConfig.topicInfo));
 
         return allTopics;
+    }
+
+    public Set<String> getAllTopicNames() {
+        return allTopicNames;
     }
 }

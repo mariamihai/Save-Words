@@ -1,4 +1,4 @@
-package com.languagedrops.savewords.dataCollectors;
+package com.languagedrops.savewords.datacollectors;
 
 import com.languagedrops.savewords.config.DocumentParsingConfig;
 import com.languagedrops.savewords.model.WordInfo;
@@ -11,15 +11,21 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import static com.languagedrops.savewords.config.DocumentParsingConfig.HREF_ATTRIBUTE;
 import static com.languagedrops.savewords.config.DocumentParsingConfig.SRC_ATTRIBUTE;
+import static com.languagedrops.savewords.config.DocumentParsingConfig.TITLE_ATTRIBUTE;
 
 @Component
 @Slf4j
 public class TopicDataCollector {
 
     private DocumentParsingConfig documentParsingConfig;
+
+    private HashMap<String, String> relatedTopics = new HashMap<>();
 
     public TopicDataCollector(DocumentParsingConfig documentParsingConfig) {
         this.documentParsingConfig = documentParsingConfig;
@@ -29,14 +35,24 @@ public class TopicDataCollector {
         List<WordInfo> words = new ArrayList<>();
 
         Document doc = Jsoup.connect(url).get();
-        Elements rows = getTopicElements(doc);
+        setRelatedTopics(doc);
 
+        Elements rows = getTopicElements(doc);
         rows.stream().forEach(row -> words.add(constructNewWordFromRow(row)));
         return words;
     }
 
     private Elements getTopicElements(Document doc) {
         return doc.body().getElementsByClass(documentParsingConfig.topicRow);
+    }
+
+    private void setRelatedTopics(Document doc) {
+        Elements relatedTopicsElements = doc.body().getElementsByClass(documentParsingConfig.linkableTopics);
+
+        relatedTopicsElements.stream().forEach(element -> {
+            Element child = element.child(0);
+            relatedTopics.putIfAbsent(child.attr(TITLE_ATTRIBUTE), child.attr(HREF_ATTRIBUTE));
+        });
     }
 
     private WordInfo constructNewWordFromRow(Element row) {
@@ -63,5 +79,9 @@ public class TopicDataCollector {
 
     private String getUrlForIllustration(Element row) {
         return row.getElementsByClass(documentParsingConfig.illustrationForWord).get(0).child(0).attr(SRC_ATTRIBUTE);
+    }
+
+    public Map<String, String> getRelatedTopics() {
+        return relatedTopics;
     }
 }

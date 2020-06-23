@@ -39,6 +39,9 @@ public class DocumentParsingConfig {
     @Value("${doc.language.topic.animation}")
     public String animation;
 
+    @Value("${doc.language.topic.linkable.topics}")
+    public String linkableTopics;
+
     public static final String TITLE_ATTRIBUTE = "title";
     public static final String HREF_ATTRIBUTE = "href";
     public static final String SRC_ATTRIBUTE = "src";
