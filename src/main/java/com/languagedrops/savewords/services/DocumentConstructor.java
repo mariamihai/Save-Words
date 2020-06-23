@@ -24,7 +24,7 @@ public class DocumentConstructor {
 
             writeToFile(folderPath, language, workbook);
         } catch (IOException e) {
-            log.trace("Exception thrown when creating the document" , e);
+            log.error("Exception thrown when creating the document", e);
         }
     }
 
@@ -37,9 +37,9 @@ public class DocumentConstructor {
 
             writeToFile(folderPath, language, workbook);
         } catch (FileNotFoundException e) {
-            log.trace("File " + language + ".xlsx was not found", e);
+            log.error("File " + language + ".xlsx was not found", e);
         } catch (IOException e) {
-            log.trace("Exception thrown when constructing the sheet for category " + categoryName, e);
+            log.error("Exception thrown when constructing the sheet for category " + categoryName, e);
         }
     }
 
