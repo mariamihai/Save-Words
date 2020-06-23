@@ -29,7 +29,7 @@ public class DocumentConstructor {
     }
 
     public void createSheetForCategory(String folderPath, String language, String categoryName, Map<String, List<WordInfo>> wordsInCategory) {
-        try (FileInputStream file = new FileInputStream(new File(language + EXTENSION))) {
+        try (FileInputStream file = new FileInputStream(new File(folderPath + language + EXTENSION))) {
             Workbook workbook = new XSSFWorkbook(file);
 
             constructCategorySheet(getSheet(workbook, categoryName),
