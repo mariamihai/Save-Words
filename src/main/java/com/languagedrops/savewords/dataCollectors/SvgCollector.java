@@ -32,7 +32,7 @@ public class SvgCollector {
                 .forEach(wordInfo -> saveImage(path, getValidNativeWord(wordInfo.getNativeWord()), wordInfo.getUrl(), wordInfo.getIsAnimation()));
     }
 
-    public void saveImage(String path, String word, String url, boolean isAnimation) {
+    private void saveImage(String path, String word, String url, boolean isAnimation) {
         if(isAnimation || isEmptyOrNullUrl(url)) {
             log.error("Couldn't process: " + word + "      " + path);
             return;
@@ -65,10 +65,12 @@ public class SvgCollector {
     }
 
     private String revertColors(String svgString) {
-        svgString = svgString.replace("#FFFFFF", "#000000");
-        svgString = svgString.replace("#fdfdfd", "#000000");
-        svgString = svgString.replace("#fefefe", "#000000");
-        return svgString.replace("#fff", "#000");
+        String replacement = "#000000";
+
+        return svgString.replace("#FFFFFF", replacement)
+                        .replace("#fdfdfd", replacement)
+                        .replace("#fefefe", replacement)
+                        .replace("#fff", "#000");
     }
 
     private String replaceLowerCaseAttributes(String svgString) {
@@ -89,7 +91,7 @@ public class SvgCollector {
         }
     }
 
-    public void convertToPng(String path, String word, Float width, Float height) {
+    private void convertToPng(String path, String word, Float width, Float height) {
         createVoidDirectory(path);
 
         String svgUriInput;
@@ -106,13 +108,13 @@ public class SvgCollector {
             pngOutputStream.flush();
             pngOutputStream.close();
         } catch (MalformedURLException e) {
-            log.trace("MalformedURLException for " + word + " - " + path, e);
+            log.error("MalformedURLException for " + word + " - " + path, e);
         } catch (TranscoderException e) {
-            log.trace("TranscoderException for " + word + " - " + path, e);
+            log.error("TranscoderException for " + word + " - " + path, e);
         } catch (FileNotFoundException e) {
-            log.trace("FileNotFoundException for " + word + " - " + path, e);
+            log.error("FileNotFoundException for " + word + " - " + path, e);
         } catch (IOException e) {
-            log.trace("IOException for " + word + " - " + path, e);
+            log.error("IOException for " + word + " - " + path, e);
         }
     }
 
