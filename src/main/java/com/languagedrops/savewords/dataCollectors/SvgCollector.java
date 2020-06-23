@@ -128,7 +128,8 @@ public class SvgCollector {
     }
 
     private String getValidNativeWord(String nativeWord) {
-        return nativeWord.replace("?", "");
+        return nativeWord.replace("?", "")
+                         .replace("/", " ");
     }
 
     private Float getOriginalWidth(String viewbox) {
