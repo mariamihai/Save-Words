@@ -1,6 +1,6 @@
 package com.languagedrops.savewords.services;
 
-import com.languagedrops.savewords.model.WordInfo;
+import com.languagedrops.savewords.domain.WordInfo;
 import com.languagedrops.savewords.datacollectors.LanguageDataCollector;
 import com.languagedrops.savewords.datacollectors.TopicDataCollector;
 import com.languagedrops.savewords.datacollectors.SvgCollector;

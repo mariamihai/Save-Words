@@ -1,7 +1,7 @@
 package com.languagedrops.savewords.datacollectors;
 
 import com.languagedrops.savewords.config.DocumentParsingConfig;
-import com.languagedrops.savewords.model.WordInfo;
+import com.languagedrops.savewords.domain.WordInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

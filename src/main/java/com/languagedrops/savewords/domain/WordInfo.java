@@ -1,4 +1,4 @@
-package com.languagedrops.savewords.model;
+package com.languagedrops.savewords.domain;
 
 import lombok.*;
 

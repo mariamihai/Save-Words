@@ -1,6 +1,6 @@
 package com.languagedrops.savewords.datacollectors;
 
-import com.languagedrops.savewords.model.WordInfo;
+import com.languagedrops.savewords.domain.WordInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
