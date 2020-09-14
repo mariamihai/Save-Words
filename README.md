@@ -67,3 +67,18 @@ The logs should be checked to verify if there are any issues with some of the wo
 ```
 logging.file.path=./logs
 ```
+
+## Running the application
+Run the application from the `SaveWordsApplication` class.
+
+Make sure the `default.folder.path` is set to your local path.
+
+Select your language (`default.language`) and the Visual Dictionary for the selected language (`default.link.starting.point`).
+
+Once the application is run, in the selected path you will find a folder with the name of the language selected. All the 
+images are here, based on category and topic, converted from .svg to .png.
+
+check the logs for any invalid images. I found several in different languages and there are several animations I couldn't 
+convert. 
+
+An Excel generated with Apache POI will be present as well, making it easy to bulk all the words to Memrise.
