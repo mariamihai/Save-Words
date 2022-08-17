@@ -34,13 +34,19 @@ public class SvgCollector {
 
     private void saveImage(String path, String word, String url, boolean isAnimation) {
         if(isAnimation || isEmptyOrNullUrl(url)) {
-            log.error("Couldn't process: " + word + "      " + path);
+            log.error("Couldn't process because is animated or is empty or null path: " + word + "      " + path);
             return;
         }
 
         String svgString;
         try {
             Element svgElement = getSvgElement(url);
+
+            if(svgElement == null) {
+                log.error("Couldn't process because svgElement is null: " + word + "      " + path);
+                return;
+            }
+
             svgString = svgElement.toString();
             String viewbox = svgElement.attr("viewbox");
 
